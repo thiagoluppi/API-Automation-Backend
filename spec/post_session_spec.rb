@@ -3,7 +3,8 @@ require_relative "routes/sessions"
 describe "POST /sessions" do
   context "login com sucesso" do
     before (:all) do
-      @result = Sessions.new.login("thiago@icloud.com", "pwd123")
+      payload = { email: "thiago@icloud.com", password: "pwd123" }
+      @result = Sessions.new.login(payload)
     end
 
     it "valida status code" do
@@ -20,7 +21,8 @@ describe "POST /sessions" do
 
   context "senha invalida" do
     before (:all) do
-      @result = Sessions.new.login("thiago@icloud.com", "123456")
+      payload = { email: "thiago@icloud.com", password: "123456" }
+      @result = Sessions.new.login(payload)
     end
 
     it "valida status code" do
