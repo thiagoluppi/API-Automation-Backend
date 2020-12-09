@@ -1,4 +1,5 @@
 require_relative "routes/sessions"
+require_relative "helpers"
 
 describe "POST /sessions" do
   context "login com sucesso" do
@@ -19,44 +20,46 @@ describe "POST /sessions" do
   #################################################################
   #################################################################
 
-  examples = [
-    {
-      title: "senha incorreta",
-      payload: { email: "thiago@icloud.com", password: "123456" },
-      code: 401,
-      error: "Unauthorized",
-    },
-    {
-      title: "usuario nao existe",
-      payload: { email: "404@icloud.com", password: "pwd123" },
-      code: 401,
-      error: "Unauthorized",
-    },
-    {
-      title: "email em branco",
-      payload: { email: "", password: "pwd123" },
-      code: 412,
-      error: "required email",
-    },
-    {
-      title: "sem o campo email",
-      payload: { password: "pwd123" },
-      code: 412,
-      error: "required email",
-    },
-    {
-      title: "senha em branco",
-      payload: { email: "thiago@icloud.com", password: "" },
-      code: 412,
-      error: "required password",
-    },
-    {
-      title: "sem o campo senha",
-      payload: { email: "thiago@icloud.com" },
-      code: 412,
-      error: "required password",
-    },
-  ]
+  # examples = [
+  #   {
+  #     title: "senha incorreta",
+  #     payload: { email: "thiago@icloud.com", password: "123456" },
+  #     code: 401,
+  #     error: "Unauthorized",
+  #   },
+  #   {
+  #     title: "usuario nao existe",
+  #     payload: { email: "404@icloud.com", password: "pwd123" },
+  #     code: 401,
+  #     error: "Unauthorized",
+  #   },
+  #   {
+  #     title: "email em branco",
+  #     payload: { email: "", password: "pwd123" },
+  #     code: 412,
+  #     error: "required email",
+  #   },
+  #   {
+  #     title: "sem o campo email",
+  #     payload: { password: "pwd123" },
+  #     code: 412,
+  #     error: "required email",
+  #   },
+  #   {
+  #     title: "senha em branco",
+  #     payload: { email: "thiago@icloud.com", password: "" },
+  #     code: 412,
+  #     error: "required password",
+  #   },
+  #   {
+  #     title: "sem o campo senha",
+  #     payload: { email: "thiago@icloud.com" },
+  #     code: 412,
+  #     error: "required password",
+  #   },
+  # ]
+
+  examples = Helpers::get_fixture("login")
 
   examples.each do |e|
     context "#{e[:title]}" do
