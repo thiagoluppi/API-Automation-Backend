@@ -13,7 +13,7 @@
   error: Unauthorized
 - title: email em branco
   payload:
-    email: ''
+    email: ""
     password: pwd123
   code: 412
   error: required email
@@ -25,7 +25,7 @@
 - title: senha em branco
   payload:
     email: thiago@icloud.com
-    password: ''
+    password: ""
   code: 412
   error: required password
 - title: sem o campo senha
