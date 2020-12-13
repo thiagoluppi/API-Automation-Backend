@@ -1,0 +1,23 @@
+---
+- title: name obrigatorio
+  payload:
+    name: ""
+    email: joao@icloud.com
+    password: "pwd123"
+  code: 412
+  error: required name
+- title: email obrigatorio
+  payload:
+    name: "Joao Lucas"
+    email: ""
+    password: pwd123
+  code: 412
+  error: required email
+- title: password obrigatorio
+  payload:
+    name: "Joao Lucas"
+    email: joao@icloud.com
+    password: ""
+  code: 412
+  error: required password
+  

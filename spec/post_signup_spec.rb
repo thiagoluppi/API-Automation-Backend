@@ -36,5 +36,25 @@ describe "POST /signup" do
     it "valida mensagem de erro" do
       expect(@result.parsed_response["error"]).to eql "Email already exists :("
     end
+
+    ############
+
+    examples = Helpers::get_fixture("signup")
+
+    examples.each do |e|
+      context "#{e[:title]}" do
+        before (:all) do
+          @result = Signup.new.create(e[:payload])
+        end
+
+        it "valida status code #{e[:code]}" do
+          expect(@result.code).to eql e[:code]
+        end
+
+        it "valida mensagem de erro" do
+          expect(@result.parsed_response["error"]).to eql e[:error]
+        end
+      end
+    end
   end
 end
