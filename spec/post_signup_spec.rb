@@ -1,10 +1,9 @@
-require_relative "routes/signup"
-require_relative "libs/mongo"
-
 describe "POST /signup" do
   context "novo usuario" do
     before (:all) do
-      payload = { name: "Dhebora", email: "dhebora@icloud.com", password: "pwd123" }
+      payload = { name: "Dhebora",
+                  email: "dhebora@icloud.com",
+                  password: "pwd123" }
 
       MongoDB.new.remove_user(payload[:email])
       @result = Signup.new.create(payload)
@@ -21,7 +20,9 @@ describe "POST /signup" do
 
   context "usuario duplicado" do
     before(:all) do
-      payload = { name: "Joao Lucas", email: "joao@icloud.com", password: "pwd123" }
+      payload = { name: "Joao Lucas",
+                  email: "joao@icloud.com",
+                  password: "pwd123" }
 
       MongoDB.new.remove_user(payload[:email])
 

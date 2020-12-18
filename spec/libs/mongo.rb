@@ -21,6 +21,8 @@ class MongoDB
   end
 
   def remove_equipo(name, email)
+    puts name
+    puts email
     user_id = get_user(email)
     @equipos.delete_many({ name: name, user: user_id })
   end
