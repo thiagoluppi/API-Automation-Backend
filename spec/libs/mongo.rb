@@ -20,10 +20,8 @@ class MongoDB
     return user[:_id]
   end
 
-  def remove_equipo(name, email)
-    puts name
-    puts email
-    user_id = get_user(email)
-    @equipos.delete_many({ name: name, user: user_id })
+  def remove_equipo(name, user_id)
+    obj_id = BSON::ObjectId.from_string(user_id) # converte ObjectId para string
+    @equipos.delete_many({ name: name, user: obj_id })
   end
 end

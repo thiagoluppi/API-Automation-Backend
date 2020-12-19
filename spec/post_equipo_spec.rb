@@ -16,10 +16,9 @@ describe "POST /equipos" do
                   category: "Cordas",
                   price: 699 }
 
-      # MongoDB.new.remove_equipo("luppi", payload[:email])
+      MongoDB.new.remove_equipo(payload[:name], @user_id)
 
       @result = Equipos.new.create(payload, @user_id)
-      puts @result
     end
 
     it "deve retornar 200" do
