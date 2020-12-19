@@ -1,6 +1,6 @@
 describe "POST /equipos" do
   before(:all) do
-    payload = { email: "luppi@icloud.com",
+    payload = { email: "thiago@icloud.com",
                 password: "pwd123" }
 
     result = Sessions.new.login(payload)
@@ -9,16 +9,17 @@ describe "POST /equipos" do
 
   context "novo equipo" do
     before(:all) do
-      thumbnail = File.open(File.join(Dir.pwd, "/spec/fixtures/images", "kramer.jpg"))
+      thumbnail = File.open(File.join(Dir.pwd, "/spec/fixtures/images", "kramer.jpg"), "rb")
 
       payload = { thumbnail: thumbnail,
                   name: "Kramer Eddie Van Halen",
                   category: "Cordas",
-                  price: 299 }
+                  price: 699 }
 
       # MongoDB.new.remove_equipo("luppi", payload[:email])
 
       @result = Equipos.new.create(payload, @user_id)
+      puts @result
     end
 
     it "deve retornar 200" do
