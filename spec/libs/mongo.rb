@@ -21,7 +21,7 @@ class MongoDB
   end
 
   def remove_equipo(name, user_id)
-    obj_id = BSON::ObjectId.from_string(user_id) # converte ObjectId para string
+    obj_id = BSON::ObjectId.from_string(user_id) # converte ObjectId para ObjectId
     @equipos.delete_many({ name: name, user: obj_id })
   end
 end
