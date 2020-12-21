@@ -17,6 +17,7 @@ describe "POST /equipos" do
       MongoDB.new.remove_equipo(payload[:name], @user_id)
 
       @result = Equipos.new.create(payload, @user_id)
+      puts @result
     end
 
     it "deve retornar 200" do
