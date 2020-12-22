@@ -11,4 +11,9 @@ class Equipos < BaseApi
     return self.class.get("/equipos/#{equipo_id}",
                           headers: { "user_id": user_id })
   end
+
+  def remove_by_id(equipo_id, user_id)
+    return self.class.delete("/equipos/#{equipo_id}",
+                             headers: { "user_id": user_id })
+  end
 end
