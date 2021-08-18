@@ -14,7 +14,7 @@ describe "DELETE /equipos/{equipos_id}" do
       # Dado que eu tenho um novo equipamento
       @payload = { thumbnail: Helpers::get_thumb("pedais.jpg"),
                    name: "Pedais do Tom Morello",
-                   category: "Áudio e Tecnologia".force_encoding("ASCII-8BIT"),
+                   category: "Áudio e Tecnologia".force_encoding("ASCII-8BIT"), # Como category tem acento precisamos colocar o encoding lá no começo do arquivo, porém o httparty trabalha com ASCII-8BIT por isso estamos forçando o encoding aqui.
                    price: 499 }
 
       MongoDB.new.remove_equipo(@payload[:name], @user_id)

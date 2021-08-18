@@ -1,8 +1,8 @@
 describe "POST /sessions" do
   context "login com sucesso" do
     before (:all) do
-      payload = { email: "thiago@icloud.com",
-                  password: "pwd123" }
+      payload = { email: "thiago.luppi@icloud.com",
+                  password: "123" }
 
       @result = Sessions.new.login(payload)
     end

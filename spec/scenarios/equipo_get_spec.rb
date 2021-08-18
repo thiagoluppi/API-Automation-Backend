@@ -1,6 +1,6 @@
 describe "GET /equipos/{equipos_id}" do
   before(:all) do
-    payload = { email: "thiago@icloud.com",
+    payload = { email: "thiago.luppi@icloud.com",
                 password: "pwd123" }
 
     result = Sessions.new.login(payload)
@@ -10,10 +10,10 @@ describe "GET /equipos/{equipos_id}" do
   context "obter unico equipo" do
     before(:all) do
       # Dado que eu tenho um novo equipamento
-      @payload = { thumbnail: Helpers::get_thumb("sanfona.jpg"),
-                   name: "Sanfona cara",
-                   category: "Outros",
-                   price: 699 }
+      @payload = { thumbnail: Helpers::get_thumb("amp.jpg"),
+                  name: "Amplificador",
+                  category: "Outros",
+                  price: 199 }
 
       MongoDB.new.remove_equipo(@payload[:name], @user_id)
 
@@ -22,7 +22,9 @@ describe "GET /equipos/{equipos_id}" do
       @equipo_id = equipo.parsed_response["_id"]
 
       # Quando faco uma requisicao GET por ID
-      @result = Equipos.new.find_by_id(@equipo_id, @user_id)
+      @result = Equipos.new.find_by_id(@equipo_id, @user_id)      
+      
+      MongoDB.new.remove_equipo(@payload[:name], @user_id)
     end
 
     it "deve retornar 200" do
@@ -31,6 +33,13 @@ describe "GET /equipos/{equipos_id}" do
 
     it "deve retornar o nome" do
       expect(@result.parsed_response).to include("name" => @payload[:name])
+
+      # puts "parsed_response:"
+      # puts @result.parsed_response["name"]
+
+      # MongoDB.new.remove_user("thiago.luppi@icloud.com")
+      # MongoDB.new.remove_user("thiago@icloud.com")
+      # MongoDB.new.remove_user("penelope@gmail.com")
     end
   end
 
@@ -47,7 +56,7 @@ end
 
 describe "GET /equipos" do
   before(:all) do
-    payload = { email: "penelope@gmail.com",
+    payload = { email: "thiago.luppi@icloud.com",
                 password: "pwd123" }
 
     result = Sessions.new.login(payload)
@@ -76,7 +85,8 @@ describe "GET /equipos" do
       end
 
       #Quando faco uma requisicao GET para /equipos
-      @result = Equipos.new.list(@user_id)
+      # @result = Equipos.new.list(@user_id)
+      @result = Equipos.new.list("123456789012345678901234") # Por conta do erro na API do Papito, é assim que fazemos para receber a lista utilizando apenas 1 user.
     end
 
     it "deve retornar 200" do
@@ -84,8 +94,7 @@ describe "GET /equipos" do
     end
 
     it "deve retornar uma lista de equipos" do
-      puts @result.parsed_response
-      puts @result.parsed_response.class
+      expect(@result.parsed_response).not_to be_empty
     end
   end
 end
